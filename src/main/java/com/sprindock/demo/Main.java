@@ -50,8 +50,8 @@ public class Main {
 		customerRepository.deleteById(id);
 	}
 
-	@PutMapping("customer_id}")
-	public ResponseEntity<Customer> updateEmployee(@PathVariable("customer_id") Integer id, @RequestBody CustomerRequest request) {
+	@PutMapping("customerId}")
+	public ResponseEntity<Customer> updateEmployee(@PathVariable("customerId") Integer id, @RequestBody CustomerRequest request) {
 		Customer customer = customerRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Customer does not exist with id: " + id));
 		customer.setName(request.name());
