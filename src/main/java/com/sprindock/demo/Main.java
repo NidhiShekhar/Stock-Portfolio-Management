@@ -1,21 +1,12 @@
 package com.sprindock.demo;
 
-// import org.hibernate.mapping.List;
 import java.util.List;
+
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.DeleteMapping;
-// import org.springframework.boot.jdbc.DataSourceBuilder;
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-// import javax.sql.DataSource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
 @RestController
@@ -33,21 +24,20 @@ public class Main {
 		SpringApplication.run(Main.class, args);
 	}
 
+	record CustomerRequest(
+		String name,
+		String email,
+		Integer age
+	){
+	}
 
 	@GetMapping
 	public List<Customer> getCustomers(){
 		return customerRepository.findAll();
 	}
 
-	record AddCustomerRequest(
-		String name,
-		String email,
-		Integer age
-	) {
-	}
-
 	@PostMapping
-	public void addCustomer(@RequestBody AddCustomerRequest request) {
+	public void addCustomer(@RequestBody CustomerRequest request) {
 		Customer customer = new Customer();
 		customer.setName(request.name());
 		customer.setEmail(request.email());
@@ -60,17 +50,15 @@ public class Main {
 		customerRepository.deleteById(id);
 	}
 
-//	@Configuration
-//	public static class DataSourceConfig {
-//		@Bean
-//		public DataSource getDataSource() {
-//			return DataSourceBuilder.create()
-//					.driverClassName("org.postgresql.Driver")
-//					.url("jdbc:postgresql://localhost:5432/customer_test")
-//					.username("avimehta")
-//					.password("12345678")
-//					.build();
-//		}
-//	}
+	@PutMapping("customer_id}")
+	public ResponseEntity<Customer> updateEmployee(@PathVariable("customer_id") Integer id, @RequestBody CustomerRequest request) {
+		Customer customer = customerRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Customer does not exist with id: " + id));
+		customer.setName(request.name());
+		customer.setEmail(request.email());
+		customer.setAge(request.age());
+		customerRepository.save(customer);
+		return ResponseEntity.ok(customer);
+	}
 
 }
