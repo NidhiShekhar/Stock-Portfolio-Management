@@ -2,10 +2,9 @@ package com.sprindock.demo;
 
 import java.util.List;
 
-import jakarta.persistence.EntityNotFoundException;
+import com.sprindock.demo.Tables.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
@@ -13,51 +12,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/customers")
 public class Main {
 
-	private final CustomerRepo customerRepository;
+	private final PortfolioRepo portfolioRepo;
+	private final UserRepo userRepo;
+	private final StocksInfoRepo stocksInfoRepo;
+	private final StocksRepo stocksRepo;
+	private final TransactionRepo transactionRepo;
 
-	public Main(CustomerRepo customerRepository) {
-		this.customerRepository = customerRepository;
+
+	public Main(PortfolioRepo portfolioRepo, UserRepo userRepo, StocksInfoRepo stocksInfoRepo, StocksRepo stocksRepo, TransactionRepo transactionRepo) {
+		this.portfolioRepo = portfolioRepo;
+		this.userRepo = userRepo;
+		this.stocksInfoRepo = stocksInfoRepo;
+		this.stocksRepo = stocksRepo;
+		this.transactionRepo = transactionRepo;
 	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
 	}
 
-	record CustomerRequest(
-		String name,
-		String email,
-		Integer age
-	){
-	}
-
-	@GetMapping
-	public List<Customer> getCustomers(){
-		return customerRepository.findAll();
-	}
-
-	@PostMapping
-	public void addCustomer(@RequestBody CustomerRequest request) {
-		Customer customer = new Customer();
-		customer.setName(request.name());
-		customer.setEmail(request.email());
-		customer.setAge(request.age());
-		customerRepository.save(customer);		
-	}
-
-	@DeleteMapping("{customerId}")
-	public void deleteCustomer(@PathVariable("customerId") Integer id){
-		customerRepository.deleteById(id);
-	}
-
-	@PutMapping("{customerId}")
-	public ResponseEntity<Customer> updateEmployee(@PathVariable("customerId") Integer id, @RequestBody CustomerRequest request) {
-		Customer customer = customerRepository.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Customer does not exist with id: " + id));
-		customer.setName(request.name());
-		customer.setEmail(request.email());
-		customer.setAge(request.age());
-		customerRepository.save(customer);
-		return ResponseEntity.ok(customer);
-	}
 
 }
