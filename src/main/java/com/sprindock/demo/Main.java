@@ -14,15 +14,12 @@ public class Main {
 
 	private final PortfolioRepo portfolioRepo;
 	private final UserRepo userRepo;
-	private final StocksInfoRepo stocksInfoRepo;
 	private final StocksRepo stocksRepo;
 	private final TransactionRepo transactionRepo;
 
-
-	public Main(PortfolioRepo portfolioRepo, UserRepo userRepo, StocksInfoRepo stocksInfoRepo, StocksRepo stocksRepo, TransactionRepo transactionRepo) {
+	public Main(PortfolioRepo portfolioRepo, UserRepo userRepo,  StocksRepo stocksRepo, TransactionRepo transactionRepo) {
 		this.portfolioRepo = portfolioRepo;
 		this.userRepo = userRepo;
-		this.stocksInfoRepo = stocksInfoRepo;
 		this.stocksRepo = stocksRepo;
 		this.transactionRepo = transactionRepo;
 	}
@@ -30,6 +27,5 @@ public class Main {
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
 	}
-
 
 }
