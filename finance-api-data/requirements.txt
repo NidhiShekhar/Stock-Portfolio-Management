@@ -1,0 +1,5 @@
+###### Requirements ######
+pandas
+requests
+aiohttp
+asyncio
