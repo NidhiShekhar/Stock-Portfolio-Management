@@ -1,4 +1,4 @@
-package com.sprindock.demo.Tables;
+package com.stport.spm.Tables;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,6 +11,7 @@ import java.util.List;
 public class Stocks {
 
 	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer stock_id;
     private String stock_sym;
     private String name;

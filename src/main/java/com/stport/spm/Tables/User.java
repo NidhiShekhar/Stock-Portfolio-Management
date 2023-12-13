@@ -1,4 +1,4 @@
-package com.sprindock.demo.Tables;
+package com.stport.spm.Tables;
 
 import jakarta.persistence.*;
 import lombok.Data;

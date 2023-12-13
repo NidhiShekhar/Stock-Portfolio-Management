@@ -1,1 +1,2 @@
-CREATE DATABASE IF NOT EXISTS customer_test;
+DROP DATABASE IF EXISTS customer_test;
+CREATE DATABASE customer_test;

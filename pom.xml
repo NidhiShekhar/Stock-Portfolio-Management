@@ -8,10 +8,10 @@
 		<version>3.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.sprin-dock</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.stport</groupId>
+	<artifactId>spm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<name>spm</name>
 	<description>CRM Spring Docker</description>
 	<properties>
 		<java.version>20</java.version>
