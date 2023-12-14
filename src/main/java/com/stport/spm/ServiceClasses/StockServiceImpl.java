@@ -19,13 +19,6 @@ public class StockServiceImpl implements StockService {
 
     }
 
-    @Override
-    public StocksDTO getStocks(Integer stock_id) {
-        Stocks stocks = stocksRepo.findById(stock_id).isPresent() ? stocksRepo.findById(stock_id).get() : null;
-        assert stocks != null;
-        return getStocksDTO(stocks);
-    }
-
     private StocksDTO getStocksDTO(Stocks stocks) {
         StocksDTO stocksDTO = new StocksDTO();
         stocksDTO.setStock_id(stocks.getStock_id());
@@ -36,6 +29,13 @@ public class StockServiceImpl implements StockService {
         stocksDTO.setCurrent_price(stocks.getCurrent_price());
         stocksDTO.setPortfolios(stocks.getPortfolios());
         return stocksDTO;
+    }
+
+    @Override
+    public StocksDTO getStocks(Integer stock_id) {
+        Stocks stocks = stocksRepo.findById(stock_id).isPresent() ? stocksRepo.findById(stock_id).get() : null;
+        assert stocks != null;
+        return getStocksDTO(stocks);
     }
 
     @Override

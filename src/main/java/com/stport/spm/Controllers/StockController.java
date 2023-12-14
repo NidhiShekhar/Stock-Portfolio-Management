@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/customers/")
+@RequestMapping("api/v1/stocks/")
 @AllArgsConstructor
 public class StockController {
     private StockService stockService;
