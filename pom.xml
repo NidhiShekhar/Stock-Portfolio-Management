@@ -14,6 +14,8 @@
 	<name>spm</name>
 	<description>CRM Spring Docker</description>
 	<properties>
+		<maven.compiler.source>3.11.0</maven.compiler.source>
+		<maven.compiler.target>3.11.0</maven.compiler.target>
 		<java.version>20</java.version>
 	</properties>
 	<dependencies>
@@ -43,7 +45,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.20</version>
+			<version>1.18.30</version>
 			<scope>provided</scope>
     	</dependency>
 
