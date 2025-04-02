@@ -8,14 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/user/")
+@RequestMapping("api/users")
 @AllArgsConstructor
 public class UserController {
 
     private UserService userService;
 
     @PostMapping()
-    public ResponseEntity<UserDTO> addUser(UserDTO userDTO) {
+    public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userDTO) {
         try {
             if (userDTO.getUser_id() == null || userDTO.getUser_id().toString().isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("{user_id}")
-    public ResponseEntity<UserDTO> getUser(Integer user_id) {
+    public ResponseEntity<UserDTO> getUser(@PathVariable Integer user_id) {
         UserDTO userDTO = userService.getUser(user_id);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
